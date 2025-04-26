@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum FileTag {
+  BASE
+  LOWRES
+  MIDRES
+  HIGHRES
+}
+
+model Image {
+  id String @id @default(cuid())
+
+  low   ImageObject? @relation(fields: [lowId], references: [id], name: "lowres")
+  lowId String?      @unique
+
+  mid   ImageObject? @relation(fields: [midId], references: [id], name: "midres")
+  midId String?      @unique
+
+  high   ImageObject? @relation(fields: [highId], references: [id], name: "highres")
+  highId String?      @unique
+
+  base   ImageObject? @relation(fields: [baseId], references: [id], name: "base")
+  baseId String?      @unique
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
+}
+
+model ImageObject {
+  id String @id @default(cuid())
+
+  tag FileTag[]
+
+  resolution Int
+  width      Int
+  height     Int
+  size       Int
+
+  type String
+  ext  String
+
+  low  Image? @relation(name: "lowres")
+  mid  Image? @relation(name: "midres")
+  high Image? @relation(name: "highres")
+  base Image? @relation(name: "base")
+}

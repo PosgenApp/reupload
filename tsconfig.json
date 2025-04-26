@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"incremental": true,
+		"target": "ESNext",
+		"module": "NodeNext",
+		"outDir": "dist",
+		"rootDir": "src/",
+		"removeComments": true,
+		"importHelpers": true,
+		"strict": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictPropertyInitialization": true,
+		"noUnusedLocals": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true
+	},
+	"include": ["src", "tests", "src/types", "src/generated/prisma"],
+	"exclude": ["node_modules"]
+}
