@@ -33,7 +33,7 @@ RUN mkdir -p /app/temp
 EXPOSE 3000
 
 # Default command to start the application
-CMD ["yarn", "start"]
+CMD ["sh", "-c", "yarn run prisma db push && node dist/main.js"]
 
 # Optional commands for development and linting
 # To run in development mode: yarn dev
