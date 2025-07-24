@@ -24,6 +24,10 @@ RUN yarn prisma generate
 
 # Build the application
 RUN yarn build
+RUN mkdir -p /app/dist/static
+RUN mkdir -p /app/dist/temp
+RUN mkdir -p /app/static
+RUN mkdir -p /app/temp
 
 # Expose the port your application runs on (adjust if necessary)
 EXPOSE 3000
